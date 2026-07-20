@@ -165,6 +165,10 @@ export default function ProductPurchasePanel({
             <Link href="/cart" className="underline">
               View cart
             </Link>
+            {" · "}
+            <Link href="/" className="underline">
+              Continue Shopping
+            </Link>
           </p>
         )}
       </div>
