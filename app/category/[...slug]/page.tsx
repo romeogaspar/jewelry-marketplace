@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
-import CategoryNav from "@/components/storefront/CategoryNav";
 import ProductCard from "@/components/storefront/ProductCard";
 import {
   resolveCategoryByPath,
@@ -48,54 +47,55 @@ export default async function CategoryPage({
   const all = products ?? [];
 
   return (
-    <>
-      <CategoryNav />
-      <div className="mx-auto max-w-6xl px-4 py-8">
-        <nav className="mb-4 text-sm text-neutral-500">
-          <Link href="/" className="hover:text-neutral-900">
-            Home
-          </Link>
-          {breadcrumb.map((c, i) => (
-            <span key={c.id}>
-              {" / "}
-              <Link
-                href={`/category/${breadcrumb.slice(0, i + 1).map((b) => b.slug).join("/")}`}
-                className="hover:text-neutral-900"
-              >
-                {c.name}
-              </Link>
-            </span>
+    <div className="mx-auto max-w-6xl px-4 py-12">
+      <nav className="mb-6 text-xs uppercase tracking-widest text-stone">
+        <Link href="/" className="hover:text-gold">
+          Home
+        </Link>
+        {breadcrumb.map((c, i) => (
+          <span key={c.id}>
+            {" / "}
+            <Link
+              href={`/category/${breadcrumb.slice(0, i + 1).map((b) => b.slug).join("/")}`}
+              className="hover:text-gold"
+            >
+              {c.name}
+            </Link>
+          </span>
+        ))}
+      </nav>
+
+      <h1 className="text-center font-serif text-3xl italic text-ink sm:text-4xl">
+        {current.name}
+      </h1>
+
+      {children.length > 0 && (
+        <div className="mt-6 flex flex-wrap justify-center gap-2">
+          {children.map((child) => (
+            <Link
+              key={child.id}
+              href={`/category/${[...slug, child.slug].join("/")}`}
+              className="border border-hairline px-4 py-1.5 text-xs font-medium uppercase tracking-widest text-stone hover:border-gold hover:text-gold"
+            >
+              {child.name}
+            </Link>
           ))}
-        </nav>
+        </div>
+      )}
 
-        <h1 className="text-2xl font-semibold text-neutral-900">{current.name}</h1>
-
-        {children.length > 0 && (
-          <div className="mt-4 flex flex-wrap gap-2">
-            {children.map((child) => (
-              <Link
-                key={child.id}
-                href={`/category/${[...slug, child.slug].join("/")}`}
-                className="rounded-full border border-neutral-300 px-3 py-1 text-sm text-neutral-600 hover:border-neutral-900 hover:text-neutral-900"
-              >
-                {child.name}
-              </Link>
+      <div className="mt-12">
+        {all.length === 0 ? (
+          <p className="text-center text-sm text-stone">
+            No products in this category yet.
+          </p>
+        ) : (
+          <div className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 md:grid-cols-4">
+            {all.map((product) => (
+              <ProductCard key={product.id} product={product} />
             ))}
           </div>
         )}
-
-        <div className="mt-8">
-          {all.length === 0 ? (
-            <p className="text-sm text-neutral-500">No products in this category yet.</p>
-          ) : (
-            <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
-              {all.map((product) => (
-                <ProductCard key={product.id} product={product} />
-              ))}
-            </div>
-          )}
-        </div>
       </div>
-    </>
+    </div>
   );
 }

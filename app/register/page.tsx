@@ -18,7 +18,7 @@ export default function RegisterPage() {
   return (
     <div className="mx-auto mt-16 w-full max-w-sm px-4">
       <form action={formAction} className="space-y-4">
-        <h1 className="text-xl font-semibold text-neutral-900">
+        <h1 className="text-center font-serif text-2xl italic text-ink">
           Create an Account
         </h1>
 
@@ -34,9 +34,9 @@ export default function RegisterPage() {
           {isSubmitting ? "Creating account..." : "Create account"}
         </Button>
 
-        <p className="text-center text-sm text-neutral-500">
+        <p className="text-center text-sm text-stone">
           Already have an account?{" "}
-          <Link href="/login" className="text-neutral-900 underline">
+          <Link href="/login" className="text-gold underline">
             Sign in
           </Link>
         </p>

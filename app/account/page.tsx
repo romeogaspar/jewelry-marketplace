@@ -27,23 +27,23 @@ export default async function AccountPage() {
 
   return (
     <div>
-      <h2 className="text-lg font-semibold text-neutral-900">Order History</h2>
+      <h2 className="font-serif text-xl italic text-ink">Order History</h2>
 
       {all.length === 0 ? (
-        <p className="mt-2 text-sm text-neutral-500">You haven&apos;t placed any orders yet.</p>
+        <p className="mt-2 text-sm text-stone">You haven&apos;t placed any orders yet.</p>
       ) : (
         <div className="mt-4 space-y-4">
           {all.map((order) => (
-            <div key={order.id} className="rounded-lg border border-neutral-200 p-4">
+            <div key={order.id} className="border border-hairline p-4">
               <div className="flex items-center justify-between">
-                <p className="text-sm text-neutral-500">
+                <p className="text-sm text-stone">
                   {new Date(order.created_at).toLocaleDateString()}
                 </p>
                 <Badge tone={PAYMENT_TONE[order.payment_status as keyof typeof PAYMENT_TONE]}>
                   {order.payment_status}
                 </Badge>
               </div>
-              <ul className="mt-2 space-y-1 text-sm text-neutral-700">
+              <ul className="mt-2 space-y-1 text-sm text-ink">
                 {order.order_items.map((item) => (
                   <li key={item.id}>
                     {item.product_title_snapshot}
@@ -53,7 +53,7 @@ export default async function AccountPage() {
                   </li>
                 ))}
               </ul>
-              <p className="mt-2 text-sm font-medium text-neutral-900">
+              <p className="mt-2 text-sm font-medium text-ink">
                 Total: {currencyFormatter.format(order.total_amount)}
               </p>
             </div>

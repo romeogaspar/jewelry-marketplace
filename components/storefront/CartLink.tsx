@@ -8,8 +8,8 @@ export default function CartLink() {
   const count = items.reduce((sum, i) => sum + i.quantity, 0);
 
   return (
-    <Link href="/cart" className="hover:text-neutral-900">
-      Cart{count > 0 ? ` (${count})` : ""}
+    <Link href="/cart" className="hover:text-gold">
+      Bag{count > 0 ? ` (${count})` : ""}
     </Link>
   );
 }

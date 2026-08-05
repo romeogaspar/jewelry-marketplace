@@ -1,22 +1,27 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Fraunces, Jost } from "next/font/google";
 import SiteHeader from "@/components/SiteHeader";
+import Footer from "@/components/Footer";
 import CartAuthSync from "@/components/CartAuthSync";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const fraunces = Fraunces({
+  variable: "--font-fraunces",
   subsets: ["latin"],
+  weight: "variable",
+  style: ["normal", "italic"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const jost = Jost({
+  variable: "--font-jost",
   subsets: ["latin"],
+  weight: ["400", "500", "600"],
 });
 
 export const metadata: Metadata = {
-  title: "Jewelry Marketplace by Cessyrona Software Studio",
-  description: "A multi-vendor fine jewelry marketplace demo.",
+  title: "Cessyrona Jewelry — Fine & Demi-Fine Jewellery",
+  description:
+    "A multi-vendor fine jewelry marketplace: hand-approved pieces from independent makers.",
 };
 
 export default function RootLayout({
@@ -27,12 +32,13 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${fraunces.variable} ${jost.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-white text-neutral-900">
+      <body className="min-h-full flex flex-col bg-parchment text-ink font-sans">
         <CartAuthSync />
         <SiteHeader />
         <main className="flex-1">{children}</main>
+        <Footer />
       </body>
     </html>
   );

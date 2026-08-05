@@ -49,7 +49,7 @@ export default function LoginPage() {
   return (
     <div className="mx-auto mt-16 w-full max-w-sm px-4">
       <form onSubmit={handleSubmit} className="space-y-4">
-        <h1 className="text-xl font-semibold text-neutral-900">Sign In</h1>
+        <h1 className="text-center font-serif text-2xl italic text-ink">Sign In</h1>
 
         <Input label="E-mail Address" type="email" id="email" required />
         <Input label="Password" type="password" id="password" required />
@@ -60,12 +60,12 @@ export default function LoginPage() {
           {isSubmitting ? "Signing in..." : "Sign in"}
         </Button>
 
-        <p className="text-center text-sm text-neutral-500">
-          New here? <Link href="/register" className="text-neutral-900 underline">Create an account</Link>
+        <p className="text-center text-sm text-stone">
+          New here? <Link href="/register" className="text-gold underline">Create an account</Link>
         </p>
-        <p className="text-center text-sm text-neutral-500">
+        <p className="text-center text-sm text-stone">
           Selling on our marketplace?{" "}
-          <Link href="/vendor/login" className="text-neutral-900 underline">
+          <Link href="/vendor/login" className="text-gold underline">
             Vendor sign in
           </Link>
         </p>

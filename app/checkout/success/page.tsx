@@ -23,14 +23,14 @@ export default async function CheckoutSuccessPage({
 
   return (
     <div className="mx-auto mt-16 max-w-md px-4 text-center">
-      <span className="text-4xl">✓</span>
-      <h1 className="mt-2 text-2xl font-semibold text-neutral-900">Order Placed!</h1>
-      <p className="mt-2 text-sm text-neutral-500">
+      <span className="text-4xl text-gold">✓</span>
+      <h1 className="mt-2 font-serif text-2xl italic text-ink">Order Placed!</h1>
+      <p className="mt-2 text-sm text-stone">
         Thanks for your order. We&apos;ll notify the vendor(s) right away.
       </p>
 
       {order && (
-        <p className="mt-4 text-sm text-neutral-700">
+        <p className="mt-4 text-sm text-ink">
           Order total: {currencyFormatter.format(order.total_amount)}
         </p>
       )}

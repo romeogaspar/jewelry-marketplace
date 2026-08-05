@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 type Tone = "neutral" | "amber" | "green" | "red" | "blue";
 
 const toneClasses: Record<Tone, string> = {
-  neutral: "bg-neutral-100 text-neutral-700",
+  neutral: "bg-parchment-deep text-stone",
   amber: "bg-amber-50 text-amber-700",
   green: "bg-green-50 text-green-700",
   red: "bg-red-50 text-red-700",

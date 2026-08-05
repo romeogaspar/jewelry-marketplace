@@ -74,8 +74,8 @@ export default function ProductPurchasePanel({
   }
 
   return (
-    <div className="grid gap-8 md:grid-cols-2">
-      <div className="aspect-square overflow-hidden rounded-lg bg-neutral-100">
+    <div className="grid gap-12 md:grid-cols-2">
+      <div className="aspect-square overflow-hidden bg-parchment-deep">
         {displayedImage ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img
@@ -84,34 +84,34 @@ export default function ProductPurchasePanel({
             className="h-full w-full object-cover"
           />
         ) : (
-          <div className="flex h-full w-full items-center justify-center text-sm text-neutral-400">
+          <div className="flex h-full w-full items-center justify-center text-xs uppercase tracking-widest text-stone">
             No image
           </div>
         )}
       </div>
 
       <div>
-        <h1 className="text-2xl font-semibold text-neutral-900">{product.title}</h1>
+        <h1 className="font-serif text-3xl italic text-ink">{product.title}</h1>
         {vendor && (
           <Link
             href={`/vendors/${vendor.slug}`}
-            className="text-sm text-neutral-500 hover:text-neutral-900"
+            className="mt-2 inline-block text-xs uppercase tracking-widest text-stone hover:text-gold"
           >
             Sold by {vendor.business_name}
           </Link>
         )}
 
+        <p className="mt-6 text-lg text-ink">{currencyFormatter.format(price)}</p>
+
         {product.description && (
-          <p className="mt-4 text-sm text-neutral-600">{product.description}</p>
+          <p className="mt-5 max-w-md text-sm leading-relaxed text-stone">
+            {product.description}
+          </p>
         )}
 
-        <p className="mt-6 text-xl font-medium text-neutral-900">
-          {currencyFormatter.format(price)}
-        </p>
-
         {variants.length > 0 && (
-          <div className="mt-4">
-            <p className="mb-2 text-sm font-medium text-neutral-700">
+          <div className="mt-6">
+            <p className="mb-2 text-xs font-medium uppercase tracking-widest text-stone">
               Metal: {selectedVariant ? METAL_LABELS[selectedVariant.metal_type] : ""}
             </p>
             <div className="flex gap-2">
@@ -126,8 +126,8 @@ export default function ProductPurchasePanel({
                   title={METAL_LABELS[v.metal_type] ?? v.metal_type}
                   className={`h-9 w-9 rounded-full border-2 transition-all ${
                     selectedVariantId === v.id
-                      ? "border-neutral-900 scale-110"
-                      : "border-neutral-200"
+                      ? "border-gold scale-110"
+                      : "border-hairline"
                   }`}
                   style={{ backgroundColor: v.swatch_hex }}
                 />
@@ -136,8 +136,8 @@ export default function ProductPurchasePanel({
           </div>
         )}
 
-        <div className="mt-4 flex items-center gap-3">
-          <label className="text-sm text-neutral-600">
+        <div className="mt-6 flex items-center gap-3">
+          <label className="text-xs uppercase tracking-widest text-stone">
             Qty
             <input
               type="number"
@@ -145,29 +145,29 @@ export default function ProductPurchasePanel({
               max={Math.max(availableStock, 1)}
               value={quantity}
               onChange={(e) => setQuantity(Math.max(1, Number(e.target.value)))}
-              className="ml-2 w-16 rounded-lg border border-neutral-300 px-2 py-1"
+              className="ml-2 w-16 border border-hairline bg-parchment px-2 py-1 text-ink focus:border-gold focus:outline-none"
             />
           </label>
-          <span className="text-xs text-neutral-400">
+          <span className="text-xs text-stone">
             {availableStock > 0 ? `${availableStock} in stock` : "Out of stock"}
           </span>
         </div>
 
-        <div className="mt-6">
+        <div className="mt-8">
           <Button onClick={handleAddToCart} disabled={availableStock <= 0}>
-            Add to Cart
+            Add to Bag
           </Button>
         </div>
 
         {justAdded && (
-          <p className="mt-3 text-sm text-green-700">
-            Added to cart.{" "}
-            <Link href="/cart" className="underline">
-              View cart
+          <p className="mt-4 text-sm text-stone">
+            Added to bag.{" "}
+            <Link href="/cart" className="text-gold underline">
+              View bag
             </Link>
             {" · "}
-            <Link href="/" className="underline">
-              Continue Shopping
+            <Link href="/" className="text-gold underline">
+              Continue shopping
             </Link>
           </p>
         )}

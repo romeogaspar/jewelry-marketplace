@@ -1,6 +1,5 @@
 import { notFound } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
-import CategoryNav from "@/components/storefront/CategoryNav";
 import ProductCard from "@/components/storefront/ProductCard";
 
 export const dynamic = "force-dynamic";
@@ -33,24 +32,23 @@ export default async function VendorStorefrontPage({
   const all = products ?? [];
 
   return (
-    <>
-      <CategoryNav />
-      <div className="mx-auto max-w-6xl px-4 py-8">
-        <h1 className="text-2xl font-semibold text-neutral-900">{vendor.business_name}</h1>
-        <p className="text-sm text-neutral-500">{all.length} products</p>
-
-        <div className="mt-8">
-          {all.length === 0 ? (
-            <p className="text-sm text-neutral-500">No live products from this vendor yet.</p>
-          ) : (
-            <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
-              {all.map((product) => (
-                <ProductCard key={product.id} product={product} />
-              ))}
-            </div>
-          )}
-        </div>
+    <div className="mx-auto max-w-6xl px-4 py-12">
+      <div className="text-center">
+        <h1 className="font-serif text-3xl italic text-ink">{vendor.business_name}</h1>
+        <p className="mt-1 text-xs uppercase tracking-widest text-stone">{all.length} products</p>
       </div>
-    </>
+
+      <div className="mt-10">
+        {all.length === 0 ? (
+          <p className="text-center text-sm text-stone">No live products from this vendor yet.</p>
+        ) : (
+          <div className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 md:grid-cols-4">
+            {all.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
   );
 }

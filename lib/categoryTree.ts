@@ -57,3 +57,20 @@ export function categoryPath(categories: CategoryNode[], categoryId: string) {
   }
   return chain;
 }
+
+// The real browsing entries for top-level nav/category tiles. A single root
+// category (one umbrella node, e.g. "Jewelry") isn't a useful link on its
+// own, so this falls through to its children in that case — everywhere that
+// needs "the categories worth linking to" (header nav, homepage tiles,
+// footer) should read from here instead of hardcoding level 1.
+export function browseCategories(categories: CategoryNode[]) {
+  const roots = categories.filter((c) => c.level === 1);
+  const entries = roots.length === 1
+    ? categories.filter((c) => c.parent_id === roots[0].id)
+    : roots;
+
+  const byId = new Map(categories.map((c) => [c.id, c]));
+  return entries
+    .sort((a, b) => a.sort_order - b.sort_order)
+    .map((c) => ({ ...c, path: categoryPath(categories, c.id).map((p) => p.slug).join("/") }));
+}

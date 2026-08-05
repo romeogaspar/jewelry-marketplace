@@ -11,10 +11,10 @@ export default function Error({
 }) {
   return (
     <div className="mx-auto mt-24 max-w-md px-4 text-center">
-      <h1 className="text-xl font-semibold text-neutral-900">
+      <h1 className="font-serif text-2xl italic text-ink">
         Something went wrong
       </h1>
-      <p className="mt-2 text-sm text-neutral-500">
+      <p className="mt-2 text-sm text-stone">
         An unexpected error occurred. You can try again, or head back home.
       </p>
       <div className="mt-6 flex justify-center gap-3">

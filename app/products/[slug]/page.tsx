@@ -1,6 +1,5 @@
 import { notFound } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
-import CategoryNav from "@/components/storefront/CategoryNav";
 import ProductPurchasePanel from "./ProductPurchasePanel";
 
 export const dynamic = "force-dynamic";
@@ -40,11 +39,8 @@ export default async function ProductDetailPage({
   ]);
 
   return (
-    <>
-      <CategoryNav />
-      <div className="mx-auto max-w-5xl px-4 py-8">
-        <ProductPurchasePanel product={product} vendor={vendor ?? null} variants={variants ?? []} />
-      </div>
-    </>
+    <div className="mx-auto max-w-5xl px-4 py-12">
+      <ProductPurchasePanel product={product} vendor={vendor ?? null} variants={variants ?? []} />
+    </div>
   );
 }

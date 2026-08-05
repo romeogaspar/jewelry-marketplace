@@ -35,9 +35,17 @@ function PaymentStep({ orderId }: { orderId: string }) {
     setIsSubmitting(true);
     setError(null);
 
+    // return_url is required at confirmation time even when redirect is
+    // "if_required" — Stripe can't know in advance whether the customer
+    // will pick a redirect-based method (e.g. a wallet), so it validates
+    // this up front. It's only actually navigated to if a redirect turns
+    // out to be necessary; otherwise we handle success below ourselves.
     const { error: confirmError } = await stripe.confirmPayment({
       elements,
       redirect: "if_required",
+      confirmParams: {
+        return_url: `${window.location.origin}/checkout/success?order=${orderId}`,
+      },
     });
 
     if (confirmError) {
@@ -109,7 +117,7 @@ export default function CheckoutForm() {
   }
 
   if (items.length === 0 && !clientSecret) {
-    return <p className="mt-4 text-sm text-neutral-500">Your cart is empty.</p>;
+    return <p className="mt-4 text-sm text-stone">Your cart is empty.</p>;
   }
 
   if (!process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY) {
@@ -125,7 +133,7 @@ export default function CheckoutForm() {
 
   return (
     <div>
-      <p className="mt-2 text-sm text-neutral-500">
+      <p className="mt-2 text-sm text-stone">
         Total: {currencyFormatter.format(clientSecret ? totalAmount : cartTotal)}
       </p>
 
